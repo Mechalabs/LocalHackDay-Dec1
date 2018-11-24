@@ -72,3 +72,5 @@ if(win == False):
     gameover()
 else:
     wingame()
+time.sleep(5)
+pygame.quit()
