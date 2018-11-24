@@ -29,7 +29,7 @@ def update(x):
     rectangle1 = pygame.Rect(x,0,50,s)
     block1.fill(Color("WHITE"), rectangle1)
     block2 = pygame.display.get_surface()
-    rectangle2= pygame.Rect(x,s+60,50,540-s)
+    rectangle2= pygame.Rect(x,s+70,50,530-s)
     block2.fill(Color("WHITE"), rectangle2)
     pygame.display.update()
     time.sleep(0.005)
@@ -60,7 +60,7 @@ while inPlay:
         s == s
         x = x-2
     if(x <= 80):
-        if(icony <= s or icony >= s+20):
+        if(icony <= s or icony >= s+30):
             inPlay = False
     if(count == 10):
         win = True
