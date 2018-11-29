@@ -12,7 +12,7 @@ BLACK = (  0,  0,  0)
 outline = 0
 pygame.font.init()
 pygame.mixer.init()
-font = pygame.font.SysFont("Comic Sans MS", 36)
+font = pygame.font.SysFont("Comic Sans MS", 32)
 
 Narwhal = pygame.image.load("Evil Narwhal.png")
 
@@ -26,10 +26,10 @@ def battlepage():
     pygame.draw.rect(gameWindow, WHITE, (50, 600, 300, 100), 1)
     pygame.draw.rect(gameWindow, WHITE, (450, 600, 300, 100), 1)
     gameWindow.blit(Narwhal, (155, 20))
-    graphics1 = font.render("Fight", 1, WHITE)
-    graphics2 = font.render("Mercy", 1, WHITE)
-    gameWindow.blit(graphics1, (150, 620))
-    gameWindow.blit(graphics2, (550, 620))
+    graphics1 = font.render("Fight - Space", 1, WHITE)
+    graphics2 = font.render("Mercy - Right Shift", 1, WHITE)
+    gameWindow.blit(graphics1, (100, 625))
+    gameWindow.blit(graphics2, (451, 625))
     pygame.display.update()
 
 
@@ -45,5 +45,11 @@ while inPlay:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
         inPlay = False
+
+##    if keys[pygame.K_SPACE]:
+##        
+##
+##    if keys[pygame.K_RSHIFT]:
+        
 
 pygame.quit()
