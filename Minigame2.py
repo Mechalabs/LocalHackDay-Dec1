@@ -5,46 +5,46 @@ from pygame.locals import *
 pygame.init()
 
 gamewindow = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Game")
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 icon =  pygame.image.load('heart.png')
+icon2 = pygame.image.load('green_heart.png')
 icony = 300
+iconx = 400
 x = 750
 s = randint(0,500)
 font = pygame.font.SysFont("Comic Sans",72)
+ingamefont = pygame.font.SysFont("Comic Sans" ,45)
 inPlay = True
-win = False
-count = 0
-
+points = 0
+timepassed = 0
+deathcounter = 0
+ingamedeathtext = ingamefont.render('Deaths: ', 3, GREEN)
+passed = False
+miliseconds = 0
+seconds = 0
+timeremaining = 30
+ingametimetext = ingamefont.render('Time remaining: ', 3, GREEN)
 def update(x):
     pygame.event.clear()
     gamewindow.fill(BLACK)
     block1 = pygame.display.get_surface()
     gamewindow.fill(BLACK)
-    gamewindow.blit(pygame.transform.scale(icon, (40, 40)), (50, icony))
+    gamewindow.blit(pygame.transform.scale(icon, (40, 40)), (iconx, icony))
     rectangle1 = pygame.Rect(x,0,50,s)
     block1.fill(Color("WHITE"), rectangle1)
     block2 = pygame.display.get_surface()
     rectangle2= pygame.Rect(x,s+70,50,530-s)
     block2.fill(Color("WHITE"), rectangle2)
+    gamewindow.blit(deathtext, (125, 0))
+    gamewindow.blit(ingamedeathtext, (0, 0))
+    gamewindow.blit(timetext, (750,0))
+    gamewindow.blit(ingametimetext, (500,0))
     pygame.display.update()
     time.sleep(0.005)
-    
-def gameover():
-    gamewindow.fill(BLACK)
-    graphics = font.render("Game Over",1,WHITE)
-    gamewindow.blit(graphics,(270,250))
-    pygame.display.update()
-
-def wingame():
-    gamewindow.fill(BLACK)
-    graphics = font.render("Good job you win!",1,WHITE)
-    gamewindow.blit(graphics, (200,250))
-    pygame.display.update()
     
 while inPlay:
     keys=pygame.key.get_pressed()
@@ -52,25 +52,52 @@ while inPlay:
         icony-=3
     if keys[K_DOWN]:
         icony+=3
+    if keys[K_RIGHT]:
+        iconx+=3
+    if keys[K_LEFT]:
+        iconx-=3
     if(x == 0):
         s = randint(0,500)
         x = 750
-        count = count+1
+        passed = False
     else:
-        s == s
         x = x-2
-    if(x <= 80):
+    if(x >= iconx and x<= iconx+50 and passed == False):
         if(icony <= s or icony >= s+30):
-            inPlay = False
-    if(count == 10):
-        win = True
+            deathcounter = deathcounter+1
+            passed = True
+        else:
+            points = points+1
+            passed = True
+            
+    if(timepassed >= 30):
         inPlay = False
-
+    deaths=str(deathcounter)
+    deathtext = ingamefont.render(deaths, 3, GREEN)
+    if(miliseconds >= 1):
+        seconds = seconds+1
+        timeremaining = 30-seconds
+        miliseconds = 0
+    timedisplay = str(timeremaining)
+    timetext = ingamefont.render(timedisplay, 3, GREEN)
     update(x)
-
-if(win == False):
-    gameover()
-else:
-    wingame()
-time.sleep(5)
+    timepassed = timepassed+0.005
+    miliseconds = miliseconds + 0.005
+    
+    
+    
+gamewindow.fill(BLACK)
+pointsscored = str(points)
+pointtext = font.render(pointsscored, 3, WHITE)
+deathtextfinal = font.render(deaths, 3, WHITE)
+text = font.render('Points: ', 3, WHITE)
+text2 = font.render('Deaths: ', 3, WHITE)
+gameover = font.render('Game Over!', 3, WHITE)
+gamewindow.blit(gameover, (275, 200))
+gamewindow.blit(text, (300,300))
+gamewindow.blit(pointtext, (500,300))
+gamewindow.blit(text2, (300,400))
+gamewindow.blit(deathtextfinal, (500, 400))
+pygame.display.update()
+time.sleep(3)
 pygame.quit()
