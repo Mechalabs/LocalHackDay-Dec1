@@ -64,55 +64,58 @@ def gameOverScreen():
     screen.blit(graphics,(270,250))
     pygame.display.update()
     
-#Game Loop
-gameLoop=True
-while gameLoop:
-    #Time passed and FPS
-    timePassed = clock.tick(150)
-    
-    #Mouse position
-    mouseX, mouseY = pygame.mouse.get_pos()
-    
-    #Killing the loop if quit game
-    for event in pygame.event.get():
-        if (event.type==pygame.QUIT):
-            gameLoop=False
+def main():
+    #Game Loop
+    gameLoop=True
+    while gameLoop:
+        #Time passed and FPS
+        timePassed = clock.tick(150)
+        
+        #Mouse position
+        mouseX, mouseY = pygame.mouse.get_pos()
+        
+        #Killing the loop if quit game
+        for event in pygame.event.get():
+            if (event.type==pygame.QUIT):
+                gameLoop=False
+                
+        #Drawing and updating balloons
+        screen.fill(BLACK)
+        for balloon in balloons:
+            #Update then draw balloon
+            balloon.update(timePassed)
+            balloon.blitme()
             
-    #Drawing and updating balloons
-    screen.fill(BLACK)
-    for balloon in balloons:
-        #Update then draw balloon
-        balloon.update(timePassed)
-        balloon.blitme()
-        
-        #If balloon shot
-        if pygame.mouse.get_pressed()[0] == 1 and buttonDown == False:
-            if balloon.drawPos.collidepoint(pygame.mouse.get_pos()):
-                balloons.remove(balloon)
-                score += 1
-                buttonDown = True
+            #If balloon shot
+            if pygame.mouse.get_pressed()[0] == 1 and buttonDown == False:
+                if balloon.drawPos.collidepoint(pygame.mouse.get_pos()):
+                    balloons.remove(balloon)
+                    score += 1
+                    buttonDown = True
 
-        elif pygame.mouse.get_pressed()[0] == 0 and buttonDown == True:
-            buttonDown = False
-        
-        #If no more balloons, make more
-        if len(balloons) == 0:
-            for x in range(0, randint(3, 5)):
-                balloons.append(Balloon(screen))
-        
-        #Draw multiple balloons after a balloon dies
-        if balloon.yPosition < -balloon.imageH/2:
-            balloons.remove(balloon)
-            if len(balloons) < 7:
-                for x in range(0, randint(2, 4)):
+            elif pygame.mouse.get_pressed()[0] == 0 and buttonDown == True:
+                buttonDown = False
+            
+            #If no more balloons, make more
+            if len(balloons) == 0:
+                for x in range(0, randint(3, 5)):
                     balloons.append(Balloon(screen))
             
-        if pygame.time.get_ticks() >= 10000:
-            gameLoop = False
+            #Draw multiple balloons after a balloon dies
+            if balloon.yPosition < -balloon.imageH/2:
+                balloons.remove(balloon)
+                if len(balloons) < 7:
+                    for x in range(0, randint(2, 4)):
+                        balloons.append(Balloon(screen))
+                
+            if pygame.time.get_ticks() >= 10000:
+                gameLoop = False
+            
+        #Draw crosshair
+        screen.blit(crosshairImage, (mouseX - (crosshairW/2), mouseY - (crosshairH/2)))
+        screen.blit(pygame.transform.scale(heartImage, (40, 40)), (mouseX - 20, mouseY - 20))
         
-    #Draw crosshair
-    screen.blit(crosshairImage, (mouseX - (crosshairW/2), mouseY - (crosshairH/2)))
-    screen.blit(pygame.transform.scale(heartImage, (40, 40)), (mouseX - 20, mouseY - 20))
-    
-    scoreboard(score)
-    pygame.display.flip()
+        scoreboard(score)
+        pygame.display.flip()
+
+main()
