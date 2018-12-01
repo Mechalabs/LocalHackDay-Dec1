@@ -57,7 +57,6 @@ while inPlay:
         x = 750
         count = count+1
     else:
-        s == s
         x = x-2
     if(x <= 80):
         if(icony <= s or icony >= s+30):
