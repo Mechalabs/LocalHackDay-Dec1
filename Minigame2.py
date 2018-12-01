@@ -11,10 +11,9 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 icon =  pygame.image.load('heart.png')
-icon2 = pygame.image.load('green_heart.png')
+x = 750
 icony = 300
 iconx = 400
-x = 750
 s = randint(0,500)
 font = pygame.font.SysFont("Comic Sans",72)
 ingamefont = pygame.font.SysFont("Comic Sans" ,45)
@@ -28,6 +27,7 @@ miliseconds = 0
 seconds = 0
 timeremaining = 30
 ingametimetext = ingamefont.render('Time remaining: ', 3, GREEN)
+direction= randint(0,1)
 def update(x):
     pygame.event.clear()
     gamewindow.fill(BLACK)
@@ -56,12 +56,21 @@ while inPlay:
         iconx+=3
     if keys[K_LEFT]:
         iconx-=3
-    if(x == 0):
-        s = randint(0,500)
-        x = 750
+    if(x == 0 or x == 752):
+        direction= randint(0,1)
+        print(direction)
+        if(direction == 0):
+            s = randint(0,500)
+            x = 750
+        elif(direction==1):
+            s = randint(0,500)
+            x = 2
         passed = False
     else:
-        x = x-2
+        if(direction == 0):
+            x = x-2
+        elif(direction == 1):
+            x = x+2
     if(x >= iconx and x<= iconx+50 and passed == False):
         if(icony <= s or icony >= s+30):
             deathcounter = deathcounter+1
