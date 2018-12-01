@@ -47,7 +47,7 @@ class Bullet(Sprite):
  
         Sprite.__init__(self)
         self.screen = screen
-        self.image = pygame.image.load("HeartBullet.png").convert_alpha()
+        self.image = pygame.image.load("AttackHeart.png").convert_alpha()
         self.imageW, self.imageH = self.image.get_size()
         self.speed = 0.3
         
@@ -112,7 +112,7 @@ while gameLoop:
         for bullet in bullets:
             #Update then draw bullet
             bullet.update(timePassed)
-            bullet.blitme()   
+            bullet.blitme() 
             
             if balloon.drawPos.collidepoint(bullet.xPosition-10, bullet.yPosition-10):
                 balloons.remove(balloon)
