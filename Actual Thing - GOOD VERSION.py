@@ -1,5 +1,5 @@
 import pygame, sys
-from random import randint
+import time
 pygame.init()
 pygame.font.init()
 pygame.mixer.init()
@@ -19,10 +19,10 @@ font2 = pygame.font.SysFont("Comic Sans MS", 36)
 oppHP = 100
 playHP = 100
 
+score = 0
+
 Narwhal = pygame.image.load("Evil Narwhal.png")
 fightNarwhal = pygame.image.load("Evil Narwhal - FIGHT.png")
-
-## SHOULD ADD GLITCHES ON PURPOSE
 
 inPlay = True
 
@@ -40,7 +40,7 @@ def startPage():
 
 def drawOppHP(oppHP):
     Jeff = font.render("Jeff", 1, WHITE)
-    opphealth = font.render("HP - ", 1, WHITE)
+    opphealth = font.render("HP : ", 1, WHITE)
     opponentHP = font.render(str(oppHP), 1, WHITE)
     gameWindow.blit(Jeff, (10, 0))
     gameWindow.blit(opphealth, (100, 0))
@@ -48,17 +48,25 @@ def drawOppHP(oppHP):
 
 def drawPlayHP(playHP):
     Player = font.render("Player", 1, WHITE)
-    playhealth = font.render("HP - ", 1, WHITE)
+    playhealth = font.render("HP : ", 1, WHITE)
     playerHP = font.render(str(playHP), 1, WHITE)
     gameWindow.blit(Player, (10, 750))
     gameWindow.blit(playhealth, (130, 750))
     gameWindow.blit(playerHP, (210, 750))
     pygame.display.update()
 
-pygame.mixer.music.load("field_of_hopes.ogg")
+def balloonPopper(score):
+    import Minigame1
+    from Minigame1 import score
+    score = Minigame1.score
+    return score
+
+# Import Music
+pygame.mixer.music.load("checkers.ogg")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(loops = -1)
 
+# Main Program
 while inPlay:
     startPage()
     drawOppHP(oppHP)
@@ -89,9 +97,15 @@ while inPlay:
             gameWindow.blit(playhealth, (130, 750))
             gameWindow.blit(playerHP, (210, 750))
             pygame.display.update()
-        
-##
+
+        balloonPopper(score)
+        from Minigame1 import score
+        oppHP -= score
+        score = 0
+        print oppHP
+
 ##    if keys[pygame.K_RSHIFT]:
+        
         
 
 pygame.quit()

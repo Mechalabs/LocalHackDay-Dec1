@@ -3,6 +3,7 @@ import time as t
 from random import randint
 from pygame.sprite import Sprite
 pygame.init()
+pygame.mixer.init()
 
 #Setup
 WIDTH = 800
@@ -15,6 +16,10 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Minigame1")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont("Comic Sans MS",30)
+
+pygame.mixer.music.load("Bonetrousle.MP3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(loops = -1)
 
 #Create Crosshair
 crosshairImage = pygame.image.load("crosshair.png").convert_alpha()
@@ -64,15 +69,15 @@ gameLoop=True
 while gameLoop:
     #Time passed and FPS
     timePassed = clock.tick(150)
-    
+        
     #Mouse position
     mouseX, mouseY = pygame.mouse.get_pos()
-    
+        
     #Killing the loop if quit game
     for event in pygame.event.get():
         if (event.type==pygame.QUIT):
             gameLoop=False
-            
+                
     #Drawing and updating balloons
     screen.fill(BLACK)
     for balloon in balloons:
@@ -94,20 +99,21 @@ while gameLoop:
         if len(balloons) == 0:
             for x in range(0, randint(3, 5)):
                 balloons.append(Balloon(screen))
-        
+            
         #Draw multiple balloons after a balloon dies
         if balloon.yPosition < -balloon.imageH/2:
             balloons.remove(balloon)
             if len(balloons) < 7:
                 for x in range(0, randint(2, 4)):
                     balloons.append(Balloon(screen))
-            
+                
         if pygame.time.get_ticks() >= 10000:
             gameLoop = False
-        
+            
     #Draw crosshair
     screen.blit(crosshairImage, (mouseX - (crosshairW/2), mouseY - (crosshairH/2)))
     screen.blit(pygame.transform.scale(heartImage, (40, 40)), (mouseX - 20, mouseY - 20))
-    
+        
     scoreboard(score)
     pygame.display.flip()
+
