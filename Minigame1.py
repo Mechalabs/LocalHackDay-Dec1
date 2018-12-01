@@ -3,6 +3,7 @@ import time as t
 from random import randint
 from pygame.sprite import Sprite
 pygame.init()
+pygame.mixer.init()
 
 #Setup
 WIDTH = 800
@@ -15,6 +16,10 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Minigame1")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont("Comic Sans MS",30)
+
+pygame.mixer.music.load("Bonetrousle.MP3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(loops = -1)
 
 #Create Crosshair
 crosshairImage = pygame.image.load("crosshair.png").convert_alpha()

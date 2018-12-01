@@ -15,9 +15,11 @@ RED = (255, 0, 0)
 outline = 0
 font = pygame.font.SysFont("Comic Sans MS", 32)
 font2 = pygame.font.SysFont("Comic Sans MS", 36)
-
+play = 1
 oppHP = 100
 playHP = 100
+
+score = 0
 
 Narwhal = pygame.image.load("Evil Narwhal.png")
 fightNarwhal = pygame.image.load("Evil Narwhal - FIGHT.png")
@@ -34,11 +36,10 @@ def startPage():
     mercy = font.render("Mercy - Right Shift", 1, WHITE)
     gameWindow.blit(fight, (100, 625))
     gameWindow.blit(mercy, (451, 625))
-##    pygame.display.update()
 
 def drawOppHP(oppHP):
-    Jeff = font.render("Jeff", 1, WHITE)
-    opphealth = font.render("HP - ", 1, WHITE)
+    Jeff  = font.render("Jeff", 1, WHITE)
+    opphealth = font.render("HP : ", 1, WHITE)
     opponentHP = font.render(str(oppHP), 1, WHITE)
     gameWindow.blit(Jeff, (10, 0))
     gameWindow.blit(opphealth, (100, 0))
@@ -46,7 +47,7 @@ def drawOppHP(oppHP):
 
 def drawPlayHP(playHP):
     Player = font.render("Player", 1, WHITE)
-    playhealth = font.render("HP - ", 1, WHITE)
+    playhealth = font.render("HP : ", 1, WHITE)
     playerHP = font.render(str(playHP), 1, WHITE)
     gameWindow.blit(Player, (10, 750))
     gameWindow.blit(playhealth, (130, 750))
@@ -54,8 +55,10 @@ def drawPlayHP(playHP):
     pygame.display.update()
 
 def balloonPopper():
-    import Import_Balloon_Popper__Copy.py
-
+    from Minigame1 import score
+    score = Minigame1.score
+    return score
+    
 # Import Music
 pygame.mixer.music.load("checkers.ogg")
 pygame.mixer.music.set_volume(0.5)
@@ -86,17 +89,22 @@ while inPlay:
 
         def drawPlayHP(playHP):
             Player = font.render("Player", 1, RED)
-            playhealth = font.render("HP - ", 1, RED)
+            playhealth = font.render("HP : ", 1, RED)
             playerHP = font.render(str(playHP), 1, RED)
             gameWindow.blit(Player, (10, 750))
             gameWindow.blit(playhealth, (130, 750))
             gameWindow.blit(playerHP, (210, 750))
             pygame.display.update()
-
-        balloonPopper()
-        oppHP = oppHP - score
+           
+        if play == 1:
+            import Minigame1
+        else:
+            Minigame1.main()
+        balloonPopper()    
+        from Minigame1 import score
+        oppHP -= score
         score = 0
-        print oppHP
+        play += 1
 
 ##    if keys[pygame.K_RSHIFT]:
         
