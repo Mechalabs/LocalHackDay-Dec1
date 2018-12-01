@@ -11,7 +11,6 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 icon =  pygame.image.load('heart.png')
-icon2 = pygame.image.load('green_heart.png')
 icony = 300
 iconx = 400
 x = 750
