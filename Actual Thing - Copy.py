@@ -57,7 +57,7 @@ def balloonPopper():
     import Import_Balloon_Popper__Copy.py
 
 # Import Music
-pygame.mixer.music.load("field_of_hopes.ogg")
+pygame.mixer.music.load("checkers.ogg")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(loops = -1)
 
@@ -97,8 +97,9 @@ while inPlay:
         oppHP = oppHP - score
         score = 0
         print oppHP
-##
+
 ##    if keys[pygame.K_RSHIFT]:
+        
         
 
 pygame.quit()

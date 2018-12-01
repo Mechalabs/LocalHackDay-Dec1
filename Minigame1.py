@@ -111,8 +111,3 @@ while gameLoop:
     
     scoreboard(score)
     pygame.display.flip()
-
-#End Game
-gameOverScreen()
-t.sleep(5)
-pygame.quit()
