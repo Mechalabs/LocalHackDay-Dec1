@@ -20,6 +20,7 @@ oppHP = 100
 playHP = 100
 
 score = 0
+deathcounter = 0
 
 Narwhal = pygame.image.load("Evil Narwhal.png")
 fightNarwhal = pygame.image.load("Evil Narwhal - FIGHT.png")
@@ -61,6 +62,12 @@ def balloonPopper(score):
     score = Minigame1COPY.score
     return score
 
+def survival(deathcounter):
+    import Minigame2
+    from Minigame2 import deathcounter
+    deathcounter = Minigame2.deathcounter
+    return deathcounter
+
 # Import Music
 pygame.mixer.music.load("checkers.ogg")
 pygame.mixer.music.set_volume(0.5)
@@ -91,7 +98,7 @@ while inPlay:
 
         def drawPlayHP(playHP):
             Player = font.render("Player", 1, RED)
-            playhealth = font.render("HP - ", 1, RED)
+            playhealth = font.render("HP : ", 1, RED)
             playerHP = font.render(str(playHP), 1, RED)
             gameWindow.blit(Player, (10, 750))
             gameWindow.blit(playhealth, (130, 750))
@@ -106,8 +113,22 @@ while inPlay:
         if oppHP <= 0:
             inPlay = False
 
+##        survival(deathcounter)
+##        from Minigame2 import deathcounter
+##        playHP -= deathcounter
+##        deathcounter = 0
+##
+##        if playHP <= 0:
+##            inPlay = False
+##
 ##    if keys[pygame.K_RSHIFT]:
-        
-        
+##        survival(deathcounter)
+##        from Minigame2 import deathcounter
+##        playHP -= deathcounter
+##        deathcounter = 0
+##
+##        if playHP <= 0:
+##            inPlay = False
+##        
 
 pygame.quit()

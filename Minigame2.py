@@ -18,7 +18,6 @@ s = randint(0,500)
 font = pygame.font.SysFont("Comic Sans",72)
 ingamefont = pygame.font.SysFont("Comic Sans" ,45)
 inPlay = True
-points = 0
 timepassed = 0
 deathcounter = 0
 ingamedeathtext = ingamefont.render('Hits: ', 3, GREEN)
@@ -109,7 +108,6 @@ while inPlay:
                 deathcounter = deathcounter+1
                 passed = True
             else:
-                points = points+1
                 passed = True
     elif(direction == 2 or direction == 3):
         if(icony >=  y and icony <= y+50 and passed == False):
@@ -117,7 +115,6 @@ while inPlay:
                 deathcounter = deathcounter+1
                 passed = True
             else:
-                points = points+1
                 passed = True
             
     if(timepassed >= 40):
@@ -133,18 +130,3 @@ while inPlay:
     update(x,y)
     timepassed = timepassed+0.005
     miliseconds = miliseconds + 0.005
-    
-    
-gamewindow.fill(BLACK)
-pointsscored = str(points)
-pointtext = font.render(pointsscored, 3, WHITE)
-deathtextfinal = font.render(deaths, 3, WHITE)
-text = font.render('Points: ', 3, WHITE)
-text2 = font.render('Hits: ', 3, WHITE)
-gameover = font.render('Game Over!', 3, WHITE)
-gamewindow.blit(gameover, (275, 200))
-gamewindow.blit(text, (300,300))
-gamewindow.blit(pointtext, (500,300))
-gamewindow.blit(text2, (325,400))
-gamewindow.blit(deathtextfinal, (470, 400))
-pygame.display.update()
