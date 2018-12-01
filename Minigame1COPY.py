@@ -11,7 +11,7 @@ HEIGHT = 800
 BLACK = (0,0,0)
 WHITE = (255, 255, 255)
 score = 0
-\
+buttonDown = False
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Minigame1")
 clock = pygame.time.Clock()
@@ -77,14 +77,14 @@ while gameLoop:
     for event in pygame.event.get():
         if (event.type==pygame.QUIT):
             gameLoop=False
-            
+                
     #Drawing and updating balloons
     screen.fill(BLACK)
     for balloon in balloons:
         #Update then draw balloon
         balloon.update(timePassed)
         balloon.blitme()
-            
+        
         #If balloon shot
         if pygame.mouse.get_pressed()[0] == 1 and buttonDown == False:
             if balloon.drawPos.collidepoint(pygame.mouse.get_pos()):
@@ -94,7 +94,7 @@ while gameLoop:
 
         elif pygame.mouse.get_pressed()[0] == 0 and buttonDown == True:
             buttonDown = False
-            
+        
         #If no more balloons, make more
         if len(balloons) == 0:
             for x in range(0, randint(3, 5)):
@@ -108,7 +108,7 @@ while gameLoop:
                     balloons.append(Balloon(screen))
                 
         if pygame.time.get_ticks() >= 10000:
-                gameLoop = False
+            gameLoop = False
             
     #Draw crosshair
     screen.blit(crosshairImage, (mouseX - (crosshairW/2), mouseY - (crosshairH/2)))
@@ -116,4 +116,3 @@ while gameLoop:
         
     scoreboard(score)
     pygame.display.flip()
-

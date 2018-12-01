@@ -56,9 +56,9 @@ def drawPlayHP(playHP):
     pygame.display.update()
 
 def balloonPopper(score):
-    import Minigame1GOODVER
-    from Minigame1GOODVER import score
-    score = Minigame1GOODVER.score
+    import Minigame1COPY
+    from Minigame1COPY import score
+    score = Minigame1COPY.score
     return score
 
 # Import Music
@@ -99,7 +99,7 @@ while inPlay:
             pygame.display.update()
 
         balloonPopper(score)
-        from Minigame1GOODVER import score
+        from Minigame1COPY import score
         oppHP -= score
         score = 0
 
