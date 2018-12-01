@@ -16,8 +16,6 @@ x = 750
 s = randint(0,500)
 font = pygame.font.SysFont("Comic Sans",72)
 inPlay = True
-win = False
-count = 0
 points = 0
 timepassed = 0
 def update(x):
@@ -43,7 +41,6 @@ while inPlay:
     if(x == 0):
         s = randint(0,500)
         x = 750
-        count = count+1
     else:
         s == s
         x = x-2
