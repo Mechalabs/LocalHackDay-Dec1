@@ -91,7 +91,7 @@ while inPlay:
 
         def drawPlayHP(playHP):
             Player = font.render("Player", 1, RED)
-            playhealth = font.render("HP - ", 1, RED)
+            playhealth = font.render("HP : ", 1, RED)
             playerHP = font.render(str(playHP), 1, RED)
             gameWindow.blit(Player, (10, 750))
             gameWindow.blit(playhealth, (130, 750))
