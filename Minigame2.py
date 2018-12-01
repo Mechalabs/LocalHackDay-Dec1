@@ -5,7 +5,6 @@ from pygame.locals import *
 pygame.init()
 
 gamewindow = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Game")
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
@@ -17,9 +16,8 @@ x = 750
 s = randint(0,500)
 font = pygame.font.SysFont("Comic Sans",72)
 inPlay = True
-win = False
-count = 0
-
+points = 0
+timepassed = 0
 def update(x):
     pygame.event.clear()
     gamewindow.fill(BLACK)
@@ -34,18 +32,6 @@ def update(x):
     pygame.display.update()
     time.sleep(0.005)
     
-def gameover():
-    gamewindow.fill(BLACK)
-    graphics = font.render("Game Over",1,WHITE)
-    gamewindow.blit(graphics,(270,250))
-    pygame.display.update()
-
-def wingame():
-    gamewindow.fill(BLACK)
-    graphics = font.render("Good job you win!",1,WHITE)
-    gamewindow.blit(graphics, (200,250))
-    pygame.display.update()
-    
 while inPlay:
     keys=pygame.key.get_pressed()
     if keys[K_UP]:
@@ -55,21 +41,24 @@ while inPlay:
     if(x == 0):
         s = randint(0,500)
         x = 750
-        count = count+1
     else:
         x = x-2
-    if(x <= 80):
+    if(x == 80):
         if(icony <= s or icony >= s+30):
-            inPlay = False
-    if(count == 10):
-        win = True
+            icony = 300
+        else:
+            points = points+1
+    if(timepassed >= 30):
         inPlay = False
-
     update(x)
+    timepassed = timepassed+0.005
 
-if(win == False):
-    gameover()
-else:
-    wingame()
-time.sleep(5)
+gamewindow.fill(BLACK)
+pointsscored = str(points)
+pointtext = font.render(pointsscored, 3, WHITE)
+text = font.render('points: ', 3, WHITE)
+gamewindow.blit(text, (250,300))
+gamewindow.blit(pointtext, (450,300))
+pygame.display.update()
+time.sleep(3)
 pygame.quit()
