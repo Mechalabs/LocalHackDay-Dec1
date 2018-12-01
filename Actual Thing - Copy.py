@@ -1,5 +1,5 @@
 import pygame, sys
-from random import randint
+import time
 pygame.init()
 pygame.font.init()
 pygame.mixer.init()
@@ -21,8 +21,6 @@ playHP = 100
 
 Narwhal = pygame.image.load("Evil Narwhal.png")
 fightNarwhal = pygame.image.load("Evil Narwhal - FIGHT.png")
-
-## SHOULD ADD GLITCHES ON PURPOSE
 
 inPlay = True
 
@@ -55,10 +53,15 @@ def drawPlayHP(playHP):
     gameWindow.blit(playerHP, (210, 750))
     pygame.display.update()
 
+def balloonPopper():
+    import Import_Balloon_Popper__Copy.py
+
+# Import Music
 pygame.mixer.music.load("field_of_hopes.ogg")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(loops = -1)
 
+# Main Program
 while inPlay:
     startPage()
     drawOppHP(oppHP)
@@ -89,7 +92,11 @@ while inPlay:
             gameWindow.blit(playhealth, (130, 750))
             gameWindow.blit(playerHP, (210, 750))
             pygame.display.update()
-        
+
+        balloonPopper()
+        oppHP = oppHP - score
+        score = 0
+        print oppHP
 ##
 ##    if keys[pygame.K_RSHIFT]:
         
