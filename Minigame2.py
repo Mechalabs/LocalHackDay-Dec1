@@ -120,7 +120,7 @@ while inPlay:
                 points = points+1
                 passed = True
             
-    if(timepassed >= 1):
+    if(timepassed >= 40):
         inPlay = False
     deaths=str(deathcounter)
     deathtext = ingamefont.render(deaths, 3, GREEN)
